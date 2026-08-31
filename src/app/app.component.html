@@ -1,0 +1,29 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" [class.collapsed]="collapsed()">
+      <ion-content>
+        <div class="brand-row">
+          <img src="assets/icon/logo.svg" class="brand-logo" alt="Anasendar logo" />
+          @if (!collapsed()) {
+            <span class="brand-title">Anasendar</span>
+          }
+          <ion-button fill="clear" size="small" class="collapse-toggle" (click)="toggleSidebar()">
+            <ion-icon slot="icon-only" [name]="collapsed() ? 'chevron-forward' : 'chevron-back'"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-list id="nav-list">
+          @for (p of appPages; track p; let i = $index) {
+            <ion-menu-toggle auto-hide="false">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          }
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

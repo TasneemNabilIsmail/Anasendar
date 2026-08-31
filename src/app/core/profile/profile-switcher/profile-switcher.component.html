@@ -1,0 +1,12 @@
+<div class="profile-switcher">
+  @for (profile of profiles$ | async; track profile.id) {
+    <ion-chip
+      [class.active]="(activeProfile$ | async)?.id === profile.id"
+      [style.--chip-color]="profile.colorHex"
+      (click)="select(profile)"
+    >
+      <span class="dot" [style.background]="profile.colorHex"></span>
+      <ion-label>{{ profile.displayName }}</ion-label>
+    </ion-chip>
+  }
+</div>

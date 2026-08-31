@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/calendar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Family Members</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    @for (profile of profiles(); track profile.id) {
+      <ion-item>
+        @if (editingId === profile.id) {
+          <span class="dot" [style.background]="editingColor"></span>
+          <ion-input [(ngModel)]="editingName" class="inline-input"></ion-input>
+          <div class="swatches" slot="end">
+            @for (color of palette; track color) {
+              <button
+                type="button"
+                class="swatch"
+                [class.selected]="color === editingColor"
+                [style.background]="color"
+                (click)="editingColor = color"
+              ></button>
+            }
+          </div>
+          <ion-button slot="end" fill="clear" (click)="saveEdit()">
+            <ion-icon name="checkmark-circle" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" fill="clear" color="medium" (click)="cancelEdit()">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+        } @else {
+          <span class="dot" [style.background]="profile.colorHex"></span>
+          <ion-label>
+            {{ profile.displayName }}
+            @if ((activeProfile$ | async)?.id === profile.id) {
+              <ion-badge color="primary">Viewing</ion-badge>
+            }
+          </ion-label>
+          @if ((activeProfile$ | async)?.id !== profile.id) {
+            <ion-button slot="end" fill="outline" size="small" (click)="selectActive(profile)">View calendar</ion-button>
+          }
+          <ion-button slot="end" fill="clear" (click)="startEdit(profile)">
+            <ion-icon name="pencil" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" fill="clear" color="danger" (click)="remove(profile)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-button>
+        }
+      </ion-item>
+    }
+  </ion-list>
+
+  <div class="add-profile">
+    <h3>Add family member</h3>
+    <ion-item>
+      <span class="dot" [style.background]="newColor"></span>
+      <ion-input label="Name" labelPlacement="stacked" [(ngModel)]="newName" placeholder="e.g. Kid 1" (keyup.enter)="addProfile()"></ion-input>
+    </ion-item>
+    <div class="swatches">
+      @for (color of palette; track color) {
+        <button
+          type="button"
+          class="swatch"
+          [class.selected]="color === newColor"
+          [style.background]="color"
+          (click)="newColor = color"
+        ></button>
+      }
+    </div>
+    <ion-button expand="block" (click)="addProfile()">Add</ion-button>
+  </div>
+</ion-content>

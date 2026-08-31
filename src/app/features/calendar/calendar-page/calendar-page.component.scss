@@ -1,0 +1,29 @@
+.calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 16px 14px;
+  padding: 10px 16px;
+  border-radius: var(--app-radius-md);
+  background: var(--ion-color-light, #f4f5f8);
+  box-shadow: var(--app-shadow-sm);
+
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+.nav-buttons,
+.view-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+ion-fab-button {
+  --box-shadow: var(--app-shadow-md);
+  --background: var(--ion-color-primary);
+}

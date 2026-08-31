@@ -1,0 +1,114 @@
+// Registering --width as an animatable length lets the collapse below transition
+// smoothly instead of snapping (supported in current Chromium/Firefox/Safari).
+@property --width {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 232px;
+}
+
+ion-menu {
+  --width: 232px;
+  --min-width: 232px;
+  transition: --width 0.2s ease;
+}
+
+ion-menu.collapsed {
+  --width: 76px;
+  --min-width: 76px;
+}
+
+ion-menu ion-content {
+  --background: var(--ion-item-background, var(--ion-background-color, #fff));
+  --padding-top: 12px;
+  --padding-bottom: 20px;
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px 18px;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  box-shadow: var(--app-shadow-sm);
+}
+
+.brand-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  background: var(--app-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.collapse-toggle {
+  margin-inline-start: auto;
+  --padding-start: 4px;
+  --padding-end: 4px;
+}
+
+ion-menu.collapsed .brand-row {
+  justify-content: center;
+}
+
+ion-menu.collapsed .collapse-toggle {
+  margin-inline-start: 0;
+}
+
+#nav-list {
+  padding: 4px 0;
+}
+
+ion-item {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --min-height: 46px;
+  --border-radius: var(--app-radius-sm);
+  margin: 2px 4px;
+  transition: background-color 0.15s ease;
+}
+
+ion-item ion-icon {
+  color: var(--ion-color-medium-shade);
+  font-size: 20px;
+}
+
+ion-item ion-label {
+  font-weight: 500;
+}
+
+ion-item.selected {
+  --background: var(--app-gradient);
+  --color: #ffffff;
+}
+
+ion-item.selected ion-icon {
+  color: #ffffff;
+}
+
+ion-menu.collapsed ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-height: 44px;
+  width: 44px;
+  height: 44px;
+  margin: 6px auto;
+}
+
+ion-menu.collapsed ion-item ion-icon {
+  margin-inline-end: 0;
+}
+
+ion-menu.collapsed ion-item ion-label {
+  display: none;
+}

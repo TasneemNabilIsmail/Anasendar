@@ -1,0 +1,30 @@
+ion-list {
+  border-radius: var(--app-radius-md);
+  overflow: hidden;
+  box-shadow: var(--app-shadow-sm);
+  margin-bottom: 12px;
+}
+
+.native-datetime {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--ion-text-color);
+}
+
+.error-note {
+  display: flex;
+  align-items: center;
+  margin: 4px 4px 12px;
+  padding: 10px 14px;
+  border-radius: var(--app-radius-sm);
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+  font-size: 0.9rem;
+}
+
+ion-button[type='submit'] {
+  --background: var(--app-gradient);
+}

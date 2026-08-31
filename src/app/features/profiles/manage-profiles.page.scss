@@ -1,0 +1,55 @@
+ion-list {
+  border-radius: var(--app-radius-md);
+  overflow: hidden;
+  box-shadow: var(--app-shadow-sm);
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6) inset;
+}
+
+.inline-input {
+  max-width: 160px;
+}
+
+.swatches {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.selected {
+    border-color: var(--ion-text-color);
+    box-shadow: var(--app-shadow-sm);
+  }
+}
+
+.add-profile {
+  margin-top: 24px;
+  padding: 14px 16px;
+  border-radius: var(--app-radius-md);
+  background: var(--ion-color-light, #f4f5f8);
+
+  h3 {
+    margin: 0 0 8px;
+  }
+}

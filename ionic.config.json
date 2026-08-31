@@ -1,0 +1,7 @@
+{
+  "name": "anasendar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

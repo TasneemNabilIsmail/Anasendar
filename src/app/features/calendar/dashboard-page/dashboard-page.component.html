@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Family Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/calendar">My Calendar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="legend">
+    @for (profile of profiles(); track profile.id) {
+      <span class="legend-item">
+        <span class="dot" [style.background]="profile.colorHex"></span>
+        {{ profile.displayName }}
+      </span>
+    }
+  </div>
+
+  @if (overlaps().length > 0) {
+    <ion-list class="overlap-panel">
+      <ion-item lines="none" class="overlap-header">
+        <ion-label>
+          <strong>Overlapping plans</strong>
+          <ion-badge color="warning">{{ overlaps().length }}</ion-badge>
+        </ion-label>
+      </ion-item>
+      @for (pair of overlaps(); track pair.a.id + pair.b.id) {
+        <ion-item lines="inset">
+          <ion-label>
+            <strong>{{ profileFor(pair.a.profileId)?.displayName }}</strong> &amp; <strong>{{ profileFor(pair.b.profileId)?.displayName }}</strong>
+            both booked {{ pair.a.startAt | date: 'MMM d, h:mm a' }}–{{ pair.a.endAt | date: 'h:mm a' }}:
+            "{{ pair.a.title }}" / "{{ pair.b.title }}"
+          </ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
+
+  <div class="calendar-toolbar">
+    <div class="nav-buttons">
+      <ion-button fill="outline" size="small" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">‹</ion-button>
+      <ion-button fill="outline" size="small" mwlCalendarToday [(viewDate)]="viewDate">Today</ion-button>
+      <ion-button fill="outline" size="small" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">›</ion-button>
+    </div>
+    <h2>{{ viewDate | calendarDate: view + 'ViewTitle' : 'en' }}</h2>
+    <div class="view-buttons">
+      <ion-button size="small" [fill]="view === CalendarView.Month ? 'solid' : 'outline'" (click)="setView(CalendarView.Month)">Month</ion-button>
+      <ion-button size="small" [fill]="view === CalendarView.Week ? 'solid' : 'outline'" (click)="setView(CalendarView.Week)">Week</ion-button>
+      <ion-button size="small" [fill]="view === CalendarView.Day ? 'solid' : 'outline'" (click)="setView(CalendarView.Day)">Day</ion-button>
+    </div>
+  </div>
+
+  @switch (view) {
+    @case (CalendarView.Month) {
+      <mwl-calendar-month-view [viewDate]="viewDate" [events]="events()" (eventClicked)="onEventClicked($event.event)" />
+    }
+    @case (CalendarView.Week) {
+      <mwl-calendar-week-view [viewDate]="viewDate" [events]="events()" (eventClicked)="onEventClicked($event.event)" />
+    }
+    @case (CalendarView.Day) {
+      <mwl-calendar-day-view [viewDate]="viewDate" [events]="events()" (eventClicked)="onEventClicked($event.event)" />
+    }
+  }
+</ion-content>

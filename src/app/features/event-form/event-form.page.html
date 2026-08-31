@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/calendar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEditMode ? 'Edit Event' : 'New Event' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Title" labelPlacement="stacked" formControlName="title" placeholder="e.g. Dentist appointment" />
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea label="Description" labelPlacement="stacked" formControlName="description" autoGrow="true" />
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Location" labelPlacement="stacked" formControlName="location" placeholder="Optional" />
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Starts</ion-label>
+        <input type="datetime-local" formControlName="startAt" class="native-datetime" />
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Ends</ion-label>
+        <input type="datetime-local" formControlName="endAt" class="native-datetime" />
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="Voice reminder" labelPlacement="stacked" formControlName="reminderMinutesBefore" interface="popover">
+          @for (minutes of reminderOptions; track minutes) {
+            <ion-select-option [value]="minutes">
+              {{ minutes === 0 ? 'No reminder' : minutes + ' minutes before' }}
+            </ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    @if (errorMessage) {
+      <ion-note color="danger" class="error-note">{{ errorMessage }}</ion-note>
+    }
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">
+      {{ isEditMode ? 'Save changes' : 'Create event' }}
+    </ion-button>
+
+    @if (isEditMode) {
+      <ion-button expand="block" fill="outline" color="danger" type="button" (click)="delete()">
+        Delete event
+      </ion-button>
+    }
+  </form>
+</ion-content>
