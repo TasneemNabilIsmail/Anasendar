@@ -1,20 +1,44 @@
-// Registering --width as an animatable length lets the collapse below transition
-// smoothly instead of snapping (supported in current Chromium/Firefox/Safari).
+﻿// Registering --width/--side-width as animatable lengths lets the collapse
+// below transition smoothly instead of snapping (supported in current
+// Chromium/Firefox/Safari).
 @property --width {
   syntax: '<length>';
   inherits: true;
-  initial-value: 232px;
+  initial-value: 260px;
+}
+
+@property --side-width {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 260px;
 }
 
 ion-menu {
-  --width: 232px;
-  --min-width: 232px;
+  --width: 260px;
+  --min-width: 260px;
   transition: --width 0.2s ease;
 }
 
 ion-menu.collapsed {
-  --width: 76px;
-  --min-width: 76px;
+  --width: 60px;
+  --min-width: 60px;
+}
+
+// ion-split-pane sizes its side pane from --side-width/--side-min-width/
+// --side-max-width - these are separate from ion-menu's own --width and
+// default to --side-max-width: 28%, which is what was leaving a large blank
+// gap between the collapsed icon column and the router outlet.
+ion-split-pane {
+  --side-width: 260px;
+  --side-min-width: 260px;
+  --side-max-width: 260px;
+  transition: --side-width 0.2s ease;
+}
+
+ion-split-pane.collapsed {
+  --side-width: 60px;
+  --side-min-width: 60px;
+  --side-max-width: 60px;
 }
 
 ion-menu ion-content {
@@ -23,6 +47,11 @@ ion-menu ion-content {
   --padding-bottom: 20px;
   --padding-start: 8px;
   --padding-end: 8px;
+}
+
+ion-menu.collapsed ion-content {
+  --padding-start: 6px;
+  --padding-end: 6px;
 }
 
 .brand-row {
@@ -59,10 +88,19 @@ ion-menu ion-content {
 
 ion-menu.collapsed .brand-row {
   justify-content: center;
+  gap: 2px;
+  padding: 6px 2px 14px;
+}
+
+ion-menu.collapsed .brand-logo {
+  width: 28px;
+  height: 28px;
 }
 
 ion-menu.collapsed .collapse-toggle {
   margin-inline-start: 0;
+  --padding-start: 2px;
+  --padding-end: 2px;
 }
 
 #nav-list {
@@ -99,9 +137,9 @@ ion-item.selected ion-icon {
 ion-menu.collapsed ion-item {
   --padding-start: 0;
   --padding-end: 0;
-  --min-height: 44px;
-  width: 44px;
-  height: 44px;
+  --min-height: 40px;
+  width: 40px;
+  height: 40px;
   margin: 6px auto;
 }
 
