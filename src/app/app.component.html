@@ -7,9 +7,6 @@
           @if (!collapsed()) {
             <span class="brand-title">Anasendar</span>
           }
-          <ion-button fill="clear" size="small" class="collapse-toggle" (click)="toggleSidebar()">
-            <ion-icon slot="icon-only" [name]="collapsed() ? 'chevron-forward' : 'chevron-back'"></ion-icon>
-          </ion-button>
         </div>
 
         <ion-list id="nav-list">
@@ -23,6 +20,17 @@
           }
         </ion-list>
       </ion-content>
+
+      <div class="sidebar-footer">
+        <button
+          type="button"
+          class="collapse-toggle"
+          [attr.aria-label]="collapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
+          (click)="toggleSidebar()"
+        >
+          <ion-icon name="chevron-back" [class.rotated]="collapsed()"></ion-icon>
+        </button>
+      </div>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>

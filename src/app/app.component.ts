@@ -10,7 +10,6 @@ import {
   IonItem,
   IonIcon,
   IonLabel,
-  IonButton,
   IonRouterOutlet,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
@@ -22,7 +21,6 @@ import {
   personCircleOutline,
   personCircleSharp,
   chevronBack,
-  chevronForward,
 } from 'ionicons/icons';
 import { ReminderWatcherService } from './core/voice/reminder-watcher.service';
 
@@ -44,7 +42,6 @@ const SIDEBAR_COLLAPSED_KEY = 'anasendar.sidebarCollapsed';
     IonItem,
     IonIcon,
     IonLabel,
-    IonButton,
     IonRouterOutlet,
   ],
 })
@@ -68,7 +65,6 @@ export class AppComponent {
       personCircleOutline,
       personCircleSharp,
       chevronBack,
-      chevronForward,
     });
     this.reminderWatcher.start();
   }

@@ -4,6 +4,11 @@ ion-list {
   box-shadow: var(--app-shadow-sm);
 }
 
+ion-label ion-badge {
+  vertical-align: middle;
+  margin-inline-start: 8px;
+}
+
 .dot {
   width: 14px;
   height: 14px;
